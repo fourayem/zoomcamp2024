@@ -1,0 +1,22 @@
+https://gist.github.com/rafik-rahoui/f98df941c4ccced9c46e9ccbdef63a03
+
+1. build the image with : docker-compose build
+2. run : docker-compose up 
+
+enter into terminal:
+    -export PYTHONPATH="${SPARK_HOME}/python/:$PYTHONPATH"
+    -export PYTHONPATH="${SPARK_HOME}/python/lib/py4j-0.10.9.5-src.zip:$PYTHONPATH"
+
+3. get inside the container by running "docker ps" to get the master_ID then executing docker exec -it container_id bash 
+    -me: the name of the container is 05-batch-processing_spark
+    -me: e.g., docker exec -it 0d0478622076 bash
+
+4. launch jupyter notebook running : jupyter notebook --ip=0.0.0.0 (without this ip adress your local machine wont be able to launch jupyter notebook through localhost:8888.)
+    -me: I have no name!@ec263ee6e92d:/opt/bitnami/spark$ jupyter notebook --ip=0.0.0.0
+Hope i covered every detail.
+5. to save jupyter notebook within container, we use docker copy (cp) command to copy the file from the container_id:pwd(print working directory)/notebook_name.ipynb
+    -I have no name!@b76ef81993f4:/opt/bitnami/spark/zones$: pwd
+        -output:  /opt/bitnami/spark
+    -in docker host 05-batch-processing, run docker ps to get docker container id
+    -execute command to copy file from container to host docker 
+        -docker cp b76ef81993f4:/opt/bitnami/spark/wk05_batch.ipynb .
